@@ -90,6 +90,7 @@ async def read_command(update: telegram.Update,
         return await update.message.reply_text(text=no_text_message)
     audio_path = convert_text_to_speech(text)
     await update.message.reply_audio(audio=audio_path)
+    os.remove(audio_path)
 
 
 async def handle_text(update: telegram.Update,
