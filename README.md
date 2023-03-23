@@ -1,49 +1,56 @@
 # A.U.S.M.I. - Apenas Um Sistema Muito Inteligente
-A.U.S.M.I. is a chatbot for Telegram inspired by the virtual assistant J.A.R.V.I.S., present in the Marvel universe. 
 
-This chatbot is able to understand text and audio messages and provide responses based on a variety of topics using GPT-3.5-turbo model.
+Welcome to the A.U.S.M.I. chatbot for Telegram, inspired by the virtual assistant J.A.R.V.I.S. from the Marvel universe. 
 
-The project makes use of the following APIs:
-- OpenAI's Whisper for text transcription.
-- OpenAI's GPT for response generation.
-- Google Text To Speech for text to speech conversion.
-- Pydub for converting audio file formats.
+A.U.S.M.I. uses the GPT-3.5-turbo model to generate responses based on various topics, and is able to understand both text and audio messages.
 
-## Demonstration
-[A.U.S.M.I. Video on Youtube](http://www.youtube.com/watch?v=AHGeXzI-h68)
+To make this possible, the project utilizes several APIs including OpenAI's Whisper for text transcription, OpenAI's GPT for response generation, Google Text To Speech for text to speech conversion, and Pydub for audio file format conversion.
 
-## Article
-You can see more details about the project in the following article:
+To learn more about the project, please see the A.U.S.M.I. article on Medium, which provides detailed information:
+[A.U.S.M.I. Article on Better Programming](https://medium.com/@marciojmo/whisper-gpt3-5-telegram-bot-j-a-r-v-i-s-794e19da6ee3)
 
-[Read A.U.S.M.I. Article on Medium](https://medium.com/@marciojmo/whisper-gpt3-5-telegram-bot-j-a-r-v-i-s-794e19da6ee3)
-
-
+You may also want to check A.U.S.M.I. demo on Youtube:
+[A.U.S.M.I. Demo on Youtube](http://www.youtube.com/watch?v=AHGeXzI-h68)
 
 ## Requirements
-- You must have a Telegram bot created (https://telegram.me/BotFather)
-- OpenAI API access token is required (https://openai.com/blog/openai-api)
-- You must have python3 installed
+To use A.U.S.M.I., you will need a Telegram bot, OpenAI API access token, and python3 installed. Ensure that the `OPENAI_TOKEN` and `TELEGRAM_TOKEN` environment variables are set with your respective credentials.
 
-## How to use
+You may also need to install ffmpeg (ubuntu example)
+```
+sudo apt-get -y update
+sudo apt-get install -y ffmpeg
+```
 
-### 1. Cloning the repository
-Clone the repository using the following command:
-`git clone git@github.com:marciojmo/ausmi.git`
+## Getting started
+Follow the steps below to get started:
 
-### 2. Installing dependencies
-Navigate to your project folder and install dependencies using pip.
+Clone the repository using the command: 
+```
+git clone git@github.com:marciojmo/ausmi.git
+```
+
+Navigate to your project folder and install dependencies using pip:
 ```
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Setting environment variables
-Set the `OPENAI_TOKEN` and `TELEGRAM_TOKEN` environment variables to your respective credentials.
+ Run the command to start the bot.
+```
+python3 bot.py
+```
 
-### 4. Running the bot
-After that just run the `python3 bot.py` command.
+Alternatively, if you have Docker installed, you can run A.U.S.M.I. inside a Docker container by following these instructions:
 
-## Live demo
-Send a message /help to @ausmibot on Telegram.
+Build the bot image using the Dockerfile located in the project root folder with this command: 
+```
+docker build -t ausmi .
+```
 
-The bot might not be running due to the OpenAI API limited quota.
+Run the bot container ensuring you specify your OpenAI and Telegram tokens: 
+```
+docker run -d -e OPENAI_TOKEN=<your_openai_token> -e TELEGRAM_TOKEN=<your_telegram_token> ausmi
+```
+
+## Schrodinger`s Live Demo
+You can see a live demo of A.U.S.M.I. by sending `/ajuda` to `@ausmibot` on Telegram. Note that the bot might or might not be running due to its limited budget for accessing OpenAI`s APIs.
