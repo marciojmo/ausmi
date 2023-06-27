@@ -5,7 +5,7 @@ import openai
 import uuid
 import pydub
 import telegram
-import gtts
+from TTS.api import TTS
 from telegram.ext import filters
 
 AUDIOS_DIR = "audios"
@@ -29,10 +29,20 @@ def generate_unique_name():
 
 
 def convert_text_to_speech(text, language_code='pt'):
-    output_filepath = os.path.join(AUDIOS_DIR, f"{generate_unique_name()}.mp3")
-    tts = gtts.gTTS(text=text, lang=language_code)
-    tts.save(output_filepath)
-    return output_filepath
+    wav_output_filepath = os.path.join(AUDIOS_DIR, f"{generate_unique_name()}.wav")
+    mp3_output_filepath = os.path.join(AUDIOS_DIR, f"{generate_unique_name()}.mp3")
+    
+    # Initialize the TTS
+    tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False, gpu=False)
+
+    # Convert text to speech and save it to a WAV file
+    tts.tts_to_file(text=text, file_path=wav_output_filepath)
+
+    # Convert the WAV file to MP3
+    audio = AudioSegment.from_wav(wav_output_filepath)
+    audio.export(mp3_output_filepath, format="mp3")
+
+    return mp3_output_filepath
 
 
 def convert_speech_to_text(audio_filepath):
